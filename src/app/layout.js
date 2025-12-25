@@ -1,43 +1,33 @@
-'use client'; // Wajib karena menggunakan hook usePathname
-
+'use client'; 
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import "./globals.css";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-
-  // Daftar menu navigasi
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Blog", path: "/blog" },
-    { name: "About", path: "/about" },
-  ];
+  const activeStyle = "text-blue-600 font-bold border-b-2 border-blue-600 pb-1";
+  const inactiveStyle = "text-gray-500 hover:text-blue-400 pb-1";
 
   return (
-    <html lang="id">
-      <body className="bg-gray-50 text-gray-900">
-        <nav className="p-4 bg-white shadow-md flex gap-6 justify-center">
-          {navItems.map((item) => {
-            // TUGAS: Cek apakah path saat ini aktif
-            const isActive = pathname === item.path;
-
-            return (
-              <Link 
-                key={item.path}
-                href={item.path} 
-                className={`font-bold transition-colors ${
-                  isActive 
-                    ? "text-blue-600 border-b-2 border-blue-600" 
-                    : "text-gray-500 hover:text-blue-400"
-                }`}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
+    <html lang="en">
+      <body>
+        <nav className="flex gap-6 p-5 border-b mb-5">
+          <Link href="/" className={pathname === '/' ? activeStyle : inactiveStyle}>
+            Home
+          </Link>
+  
+          <Link href="/blog" className={pathname === '/blog' ? activeStyle : inactiveStyle}>
+            Blog
+          </Link>
+          
+          <Link href="/about" className={pathname === '/about' ? activeStyle : inactiveStyle}>
+            About
+          </Link>
         </nav>
-        <main className="container mx-auto p-4">{children}</main>
+        
+        <main className="px-5">
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { posts } from "../../data/posts"; // Import data
+import { posts } from "../../data/posts";
 export default function BlogList() {
   return (
     <div>

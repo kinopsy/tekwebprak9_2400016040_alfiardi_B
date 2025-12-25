@@ -1,4 +1,3 @@
-// src/app/about/page.jsx
 export default function AboutPage() {
   return (
     <div className="p-10">
